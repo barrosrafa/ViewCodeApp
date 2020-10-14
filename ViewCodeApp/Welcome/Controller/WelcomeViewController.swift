@@ -1,10 +1,8 @@
 import UIKit
 
-class WelcomeViewController: UIViewController {
+class WelcomeViewController: UIViewController, HasCodeView {
+    typealias CustomView = WelcomeView
     
-    var customView: WelcomeView {
-        return view as! WelcomeView
-    }
     
     override func loadView() {
         view = WelcomeView(delegate: self)
