@@ -2,6 +2,10 @@ import UIKit
 
 class WelcomeViewController: UIViewController {
     
+    var customView: WelcomeView {
+        return view as! WelcomeView
+    }
+    
     override func loadView() {
         view = WelcomeView(delegate: self)
     }
@@ -25,13 +29,13 @@ class WelcomeViewController: UIViewController {
         guard let userInfo = notification.userInfo,
             let keyBoardFrame = userInfo[UIResponder.keyboardFrameEndUserInfoKey] as? CGRect else {return}
         
-        (view as? WelcomeView)?.scrollView.contentInset.bottom = keyBoardFrame.size.height - view.safeAreaInsets.bottom
-        (view as? WelcomeView)?.scrollView.verticalScrollIndicatorInsets.bottom = keyBoardFrame.size.height - view.safeAreaInsets.bottom
+        customView.scrollView.contentInset.bottom = keyBoardFrame.size.height - view.safeAreaInsets.bottom
+        customView.scrollView.verticalScrollIndicatorInsets.bottom = keyBoardFrame.size.height - view.safeAreaInsets.bottom
     }
     
     @objc private func keyBoardWillHide(notification: NSNotification) {
-        (view as? WelcomeView)?.scrollView.contentInset.bottom = 0
-        (view as? WelcomeView)?.scrollView.verticalScrollIndicatorInsets.bottom = 0
+        customView.scrollView.contentInset.bottom = 0
+        customView.scrollView.verticalScrollIndicatorInsets.bottom = 0
     }
 }
 
