@@ -2,7 +2,7 @@ import Foundation
 import UIKit
 
 extension UIColor {
-     static let mainBlack = UIColor(r: 20, g: 20, b: 20)
+    static let mainBlack = UIColor(r: 20, g: 20, b: 20)
     static let mediumGray = UIColor(r: 124, g: 124, b: 124)
     static let basePurple = UIColor(r: 97, g: 97, b: 255)
     static let ultraLightGray = UIColor(r: 251, g: 251, b: 251)
@@ -10,17 +10,17 @@ extension UIColor {
     static let title = UIColor.mainBlack
     static let body = UIColor.mediumGray
     static let mainButton = UIColor.basePurple
-    static let secondatyButton = UIColor.white
+    static let secondaryButton = UIColor.white
     static let mainButtonText = UIColor.white
-    static let secondatyButtonText = UIColor.mainBlack
-    static let secondatyButtonBorder = UIColor.mainBlack
+    static let secondaryButtonText = UIColor.mainBlack
+    static let secondaryButtonBorder = UIColor.mainBlack
     static let view = UIColor.ultraLightGray
 }
 
 extension UIFont {
     static let title = UIFont.boldSystemFont(ofSize: 28)
-    static let body = UIFont.boldSystemFont(ofSize: 15)
-    static let button = UIFont.boldSystemFont(ofSize: 15)
+    static let body = UIFont.systemFont(ofSize: 15)
+    static let button = UIFont.systemFont(ofSize: 15)
 }
 
 enum Margin {
