@@ -1,3 +1,11 @@
+//
+//  WelcomeButton.swift
+//  ViewCodeApp
+//
+//  Created by Eric Alves Brito on 13/10/20.
+//  Copyright © 2020 FIAP. All rights reserved.
+//
+
 import UIKit
 
 class WelcomeButton: UIButton {

@@ -1,70 +1,78 @@
+//
+//  WelcomeView.swift
+//  ViewCodeApp
+//
+//  Created by Eric Alves Brito on 13/10/20.
+//  Copyright © 2020 FIAP. All rights reserved.
+//
+
 import UIKit
 
 protocol WelcomeViewDelegate: AnyObject {
     func loginButtonTapped(withPhone: String)
-    func signUpButtonTapped()
-    func facebookButtonTapped()
-    func googleButtonTapped()
+    func signUpbuttonTapped()
+    func facebookbuttonTapped()
+    func googlebuttonTapped()
 }
 
 class WelcomeView: UIView, CodeView {
     
+    //MARK: Properties
     weak var delegate: WelcomeViewDelegate?
-    
-    let scrollView: UIScrollView = {
+
+    @ViewCodeComponent
+    var scrollView: UIScrollView = {
         let scrollView = UIScrollView(frame: .zero)
-        scrollView.translatesAutoresizingMaskIntoConstraints = false
         scrollView.keyboardDismissMode = .interactive
         return scrollView
     }()
-    
-    let contentView: UIView = {
+
+    @ViewCodeComponent
+    var contentView: UIView = {
         let contentView = UIView(frame: .zero)
-        contentView.translatesAutoresizingMaskIntoConstraints = false
         return contentView
     }()
-    
-    let mainImage: UIImageView = {
+
+    @ViewCodeComponent
+    var mainImage: UIImageView = {
         let imageView = UIImageView(frame: .zero)
-        imageView.image = UIImage(named: "home")
+        imageView.image = #imageLiteral(resourceName: "home")
         imageView.contentMode = .scaleAspectFit
         imageView.clipsToBounds = true
-        imageView.translatesAutoresizingMaskIntoConstraints = false
         return imageView
     }()
-    
-    let titleLabel: UILabel = {
+
+    @ViewCodeComponent
+    var titleLabel: UILabel = {
         let label = UILabel(frame: .zero)
-        label.text = "Welcome!"
+        label.text = Localization.welcome
         label.textAlignment = .center
         label.font = .title
         label.textColor = .title
         label.accessibilityIdentifier = "welcome-title-label"
-        label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
     
-    let bodyLabel: UILabel = {
+    @ViewCodeComponent
+    var bodyLabel: UILabel = {
         let label = UILabel(frame: .zero)
-        label.text = "Lets workout! here you can create the perfect trainning"
+        label.text = Localization.main
         label.textAlignment = .center
         label.font = .body
         label.textColor = .body
         label.numberOfLines = 0
-        label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
     
-    let phoneTextField: UITextField = {
+    @ViewCodeComponent
+    var phoneTextField: UITextField = {
         let textField = UITextField(frame: .zero)
-        textField.placeholder = "Phone"
+        textField.placeholder = Localization.phone
         textField.borderStyle = .roundedRect
         textField.keyboardType = .phonePad
         textField.textAlignment = .center
-        textField.translatesAutoresizingMaskIntoConstraints = false
         return textField
     }()
-    
     
     let buttonsStackView: UIStackView = {
         let stackView = UIStackView(frame: .zero)
@@ -76,19 +84,22 @@ class WelcomeView: UIView, CodeView {
         return stackView
     }()
     
-    let loginButton = WelcomeButton(style: .main, title: "Login")
-    let signUpButton = WelcomeButton(style: .secondary, title: "Sign Up")
+    let loginButton = WelcomeButton(style: .main, title: Localization.loginButton)
+    let signUpButton = WelcomeButton(style: .secondary, title: Localization.signupButton)
     
+    
+    //MARK: Super Methods
+    required init?(coder: NSCoder) {
+        super.init(coder: coder)
+    }
+
+    //MARK: Methods
     init(delegate: WelcomeViewDelegate) {
         super.init(frame: .zero)
         self.delegate = delegate
         setup()
     }
-    
-    required init?(coder: NSCoder) {
-        super.init(coder: coder)
-    }
-    
+
     func setupComponents() {
         addSubview(scrollView)
         scrollView.addSubview(contentView)
@@ -102,11 +113,19 @@ class WelcomeView: UIView, CodeView {
     }
     
     func setupConstraints() {
+        //NSLayoutContraints
+        
+        //VFL (Visual Format Language)
+        
+        //Layout Anchors
+        
+        //ScrollView
         scrollView.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor).isActive = true
         scrollView.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor).isActive = true
         scrollView.widthAnchor.constraint(equalTo: widthAnchor).isActive = true
         scrollView.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
         
+        //ContentView
         contentView.topAnchor.constraint(equalTo: scrollView.topAnchor).isActive = true
         contentView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor).isActive = true
         contentView.widthAnchor.constraint(equalTo: scrollView.widthAnchor).isActive = true
@@ -115,35 +134,39 @@ class WelcomeView: UIView, CodeView {
         contentViewHeightConstraint.priority = .defaultLow
         contentViewHeightConstraint.isActive = true
         
+        //MainImage
         mainImage.topAnchor.constraint(equalTo: contentView.topAnchor, constant: Margin.verticalVeryLarge).isActive = true
         mainImage.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: Margin.horizontal).isActive = true
         mainImage.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -Margin.horizontal).isActive = true
         mainImage.heightAnchor.constraint(equalTo: heightAnchor, multiplier: 0.3).isActive = true
         
+        //TitleLabel
         titleLabel.topAnchor.constraint(equalTo: mainImage.bottomAnchor, constant: Margin.verticalVeryLarge).isActive = true
         titleLabel.leadingAnchor.constraint(equalTo: mainImage.leadingAnchor).isActive = true
         titleLabel.trailingAnchor.constraint(equalTo: mainImage.trailingAnchor).isActive = true
         
+        //BodyLabel
         bodyLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: Margin.verticalSmall).isActive = true
         bodyLabel.leadingAnchor.constraint(equalTo: titleLabel.leadingAnchor).isActive = true
         bodyLabel.trailingAnchor.constraint(equalTo: titleLabel.trailingAnchor).isActive = true
         
+        //PhoneTextField
         phoneTextField.topAnchor.constraint(equalTo: bodyLabel.bottomAnchor, constant: Margin.verticalLarge).isActive = true
         phoneTextField.leadingAnchor.constraint(equalTo: bodyLabel.leadingAnchor).isActive = true
         phoneTextField.trailingAnchor.constraint(equalTo: bodyLabel.trailingAnchor).isActive = true
         
+        //ButtonsStackView
         buttonsStackView.topAnchor.constraint(equalTo: phoneTextField.bottomAnchor, constant: Margin.verticalNormal).isActive = true
         buttonsStackView.centerXAnchor.constraint(equalTo: contentView.centerXAnchor).isActive = true
         
+        //Login/SignUp buttons
         loginButton.widthAnchor.constraint(equalToConstant: 120).isActive = true
         loginButton.heightAnchor.constraint(equalToConstant: 50).isActive = true
-        
         signUpButton.heightAnchor.constraint(equalTo: loginButton.heightAnchor).isActive = true
     }
     
     func setupExtraConfigurations() {
         backgroundColor = .view
-        
         loginButton.addTarget(self, action: #selector(buttonTapped), for: .touchUpInside)
         signUpButton.addTarget(self, action: #selector(buttonTapped), for: .touchUpInside)
     }
@@ -153,7 +176,7 @@ class WelcomeView: UIView, CodeView {
         case loginButton:
             delegate?.loginButtonTapped(withPhone: phoneTextField.text!)
         case signUpButton:
-            delegate?.signUpButtonTapped()
+            delegate?.signUpbuttonTapped()
         default:
             break
         }

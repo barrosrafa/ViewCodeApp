@@ -1,4 +1,11 @@
-import Foundation
+//
+//  AppStyle.swift
+//  ViewCodeApp
+//
+//  Created by Eric Alves Brito on 13/10/20.
+//  Copyright © 2020 FIAP. All rights reserved.
+//
+
 import UIKit
 
 extension UIColor {
@@ -9,7 +16,7 @@ extension UIColor {
     
     static let title = UIColor.mainBlack
     static let body = UIColor.mediumGray
-    static let mainButton = UIColor.basePurple
+    static let mainButton = UIColor(named: "MainButton") ?? UIColor.basePurple
     static let secondaryButton = UIColor.white
     static let mainButtonText = UIColor.white
     static let secondaryButtonText = UIColor.mainBlack
